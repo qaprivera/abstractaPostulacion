@@ -19,6 +19,20 @@ pipeline {
                 }
             }
         }
+
+        stage('Publicar HTML TestNG') {
+            steps {
+                dir('SelAbstractaPostulacion') {
+                    publishHTML(target: [
+                        reportDir: 'build/reports/tests',
+                        reportFiles: 'index.html',
+                        reportName: 'TestNG Report',
+                        keepAll: true,
+                        alwaysLinkToLastBuild: true
+                    ])
+                }
+            }
+        }
     }
 
     post {
