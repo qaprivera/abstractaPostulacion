@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout SCM y tests') {
             steps {
                 git url: 'https://github.com/qaprivera/abstractaPostulacion.git', branch: 'main'
-                
+
                 dir('SelAbstractaPostulacion') {
                     bat '.\\gradlew.bat clean test'
                 }
@@ -16,19 +16,14 @@ pipeline {
             steps {
                 dir('SelAbstractaPostulacion') {
                     junit 'build/test-results/test/*.xml'
-                }
-            }
-        }
 
-        stage('Publicar HTML TestNG') {
-            steps {
-                dir('SelAbstractaPostulacion') {
-                    publishHTML(target: [
-                        reportDir: 'build/reports/tests',
+                    publishHTML([
+                        reportDir: 'build/reports/tests/test',
                         reportFiles: 'index.html',
                         reportName: 'TestNG Report',
-                        keepAll: true,
-                        alwaysLinkToLastBuild: true
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true
                     ])
                 }
             }
