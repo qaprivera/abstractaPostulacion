@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'com.tuempresa'
+version '1.0-SNAPSHOT'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Selenium WebDriver
+    implementation 'org.seleniumhq.selenium:selenium-java:4.19.1'
+
+
+    implementation 'org.apache.pdfbox:pdfbox:2.0.30'
+
+
+
+    // Apache Commons IO
+    implementation 'commons-io:commons-io:2.11.0' // para FileUtils
+
+    // WebDriverManager de Boni García
+    implementation 'io.github.bonigarcia:webdrivermanager:5.7.0'
+
+    // TestNG
+    testImplementation 'org.testng:testng:7.7.1'
+}
+
+test {
+    useTestNG()
+}
